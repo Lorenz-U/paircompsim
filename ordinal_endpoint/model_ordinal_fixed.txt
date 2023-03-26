@@ -1,0 +1,33 @@
+model {
+  for (l in 1:n.c) { # loop through all comparisons
+    for (j in 1:n.r) { # loop through raters
+      p[l, 1, j] <- pq[l, 1, j]
+      logit(pq[l, 1, j]) <- mucat[1] - delta[j, l] # model for linear predictor
+      for (k in 2:n.cat) { # loop through categories of score - 1.
+        logit(pq[l, k, j]) <- mucat[k] - delta[j, l] # model for linear predictor
+        p[l, k, j] <- pq[l, k, j] - pq[l, (k-1), j]
+      }
+      p[l, (n.cat+1), j] <- 1 - pq[l, n.cat, j]
+      r.a[l, 1:(n.cat+1), j] ~ dmulti(p[l, 1:(n.cat+1), j], n.ov)
+    }
+  }
+  for (j in 1:n.r) {
+    for (l in 1:n.c) {
+      delta[j, l] <- d[a.c[l, 2]] - d[a.c[l, 1]]
+    }
+  }
+  d[1] <- 0 # zero for reference treatment
+  for (l in 2:n.c) {
+    d[l] ~ dnorm(0, .0001) # vague normal priors
+  }
+  for (k in 1:n.cat) {
+    mucat0[k] ~ dnorm(0, .0001) # vague normal priors
+  }
+  mucat[1:n.cat] <- sort(mucat0)
+  dd <- d[2] - d[3]
+  # ranking on relative scale:
+  rk <- rank(d[])
+  for (l in 1:n.c) {
+    best[l] <- equals(rk[l], n.c) # prob. that method k is best
+  }
+}

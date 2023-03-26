@@ -1,0 +1,30 @@
+model {
+  for (j in 1:n.r){					# loop through raters
+    for (l in 1:n.c){                                   # loop through comparisons
+      for(i in 1:n.p) {					# loop through patients
+        y[i, l, j] ~ dnorm(delta[j, l], prec[l])        # normal likelihood
+      }
+    }
+    for (l in 1:n.c) {
+      delta[j, l] ~ dnorm(d[a.c[l,2]] - d[a.c[l,1]], tau[l])
+    }
+  }
+  d[1] <- 0 # zero for reference treatment
+  for (l in 2:n.c) {
+    d[l] ~ dnorm(0,.0001)		# vague normal priors
+  }
+  for (l in 1:n.c) {
+    prec[l] ~ dgamma(.001,.001)                              # vague gamma priors
+    sd[l] <- pow(prec[l], -0.5)
+  }
+  dd <- d[2] - d[3]
+  for (l in 1:n.c) {
+    tau[l] ~ dgamma(.001,.001)                               # vague gamma priors
+    sdtau[l] <- pow(tau[l], -0.5)
+  }
+  # ranking on relative scale:
+  rk <- rank(d[])
+  for (l in 1:n.c) {
+    best[l] <- equals(rk[l], n.c)				# Prob. that method j is best
+  }
+}
