@@ -111,8 +111,8 @@ fixed.ordinal <- function(x, n.burnin = 5000, n.iter = 25000, n.thin = 5) {
 }
 
 
-# Random effects model for normal data
-# ====================================
+# Random effects model for ordinal data
+# =====================================
 
 # Parameters:
 # x:            data matrix
@@ -142,7 +142,7 @@ random.ordinal <- function(x, n.burnin = 5000, n.iter = 25000, n.thin = 5) {
   r <- fun.trans(x, comp, rater)
   
   # structure of r:
-  # first dimension: questions (the object name "rater" above is misleading!)
+  # first dimension: questions (the object name "rater" above may be misleading!)
   # second dimension: ratings - 1:
   # Sum of ratings:
   # If a rater says 3 (favors second option), then no count
