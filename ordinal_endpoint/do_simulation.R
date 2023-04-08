@@ -34,13 +34,11 @@ do.sim <- function(n.sim = 100, model = "fixed.ordinal", seed = 12345, alpha = 0
                    n.cores = 4) {
   cat(paste0("Started at ", Sys.time(), "\n"))
   set.seed(seed)
-  # create list to safe all fit summaries per model and iteration;
+  # create list to save all fit summaries per model and iteration;
   # one list entry per model:
   res <- list(4)
   
-  # create p-value matrix (ncol=4, because max. 4 different models will be evaluated).
-  # Note: actually, we only assess 2 different models; for ordinal data, we need a
-  # separate function => to be updated.
+  # create p-value matrix
   p_AB_mat <- p_AC_mat <- p_CB_mat <- matrix(NA, nrow = n.sim, ncol = 4)
   
   # create object for p-value output:
@@ -113,7 +111,6 @@ do.sim <- function(n.sim = 100, model = "fixed.ordinal", seed = 12345, alpha = 0
   
   
   # Do Wilcoxon test for A vs. C:
-  
   if ("wilcox" %in% model) {
     cl <- makeCluster(n.cores)
     registerDoParallel(cl)
@@ -136,7 +133,6 @@ do.sim <- function(n.sim = 100, model = "fixed.ordinal", seed = 12345, alpha = 0
   }
   
   # Fit Wilcoxon cluster test for A vs. C:
-  
   if ("wilcox.clust" %in% model) {
     cl <- makeCluster(n.cores)
     registerDoParallel(cl)
@@ -159,8 +155,6 @@ do.sim <- function(n.sim = 100, model = "fixed.ordinal", seed = 12345, alpha = 0
     }
     cat(paste0("Wilcoxon cluster tests done, ", Sys.time(), "\n"))
   }
-  # stopCluster(cl)
-  
   # End of parallel run section.
   
   # For single core runs:

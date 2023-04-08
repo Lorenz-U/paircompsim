@@ -26,7 +26,7 @@ sim.study1 <- do.sim(n.sim = 10000,
                      model = c("fixed.normal", "random.normal",
                                "t.test", "fr.mixed"),
                      seed = 12345, alpha = 0.05,
-                     n.cores = 5)
+                     n.cores = 4)
 # evaluate results:
 eval.sim(sim.study1, k = 5)
 
@@ -39,7 +39,7 @@ sim.study2 <- do.sim(n.sim = 10000,
                      model = c("fixed.normal", "random.normal",
                                "t.test", "fr.mixed"),
                      seed = 12345, alpha = 0.05,
-                     n.cores = 5)
+                     n.cores = 4)
 
 # evaluate results:
 eval.sim(sim.study2, k = 5)
@@ -53,7 +53,7 @@ sim.study3 <- do.sim(n.sim = 10000,
                      model = c("fixed.normal", "random.normal",
                                "t.test", "fr.mixed"),
                      seed = 19560, alpha = 0.05,
-                     n.cores = 5)
+                     n.cores = 4)
 
 # evaluate results:
 eval.sim(sim.study3, k = 5)
@@ -67,7 +67,7 @@ sim.study4 <- do.sim(n.sim = 10000,
                      model = c("fixed.normal", "random.normal",
                                "t.test", "fr.mixed"),
                      seed = 12345, alpha = 0.05,
-                     n.cores = 5)
+                     n.cores = 4)
 
 # evaluate results:
 eval.sim(sim.study4, k = 5)
@@ -82,7 +82,7 @@ sim.study5 <- do.sim(n.sim = 10000,
                      model = c("fixed.normal", "random.normal",
                                "t.test", "fr.mixed"),
                      seed = 12345, alpha = 0.05,
-                     n.cores = 5)
+                     n.cores = 4)
 
 # evaluate results:
 eval.sim(sim.study5, k = 5)
@@ -96,7 +96,7 @@ sim.study6 <- do.sim(n.sim = 10000,
                      model = c("fixed.normal", "random.normal",
                                "t.test", "fr.mixed"),
                      seed = 12345, alpha = 0.05,
-                     n.cores = 5)
+                     n.cores = 4)
 
 # evaluate results:
 eval.sim(sim.study6, d_true = 0.122, k = 5)
@@ -111,7 +111,7 @@ sim.study7 <- do.sim(n.sim = 10000,
                      model = c("fixed.normal", "random.normal",
                                "t.test", "fr.mixed"),
                      seed = 12345, alpha = 0.05,
-                     n.cores = 5)
+                     n.cores = 4)
 
 # evaluate results:
 eval.sim(sim.study7, d_true = 0.27, k = 5)
@@ -127,7 +127,7 @@ sim.study8 <- do.sim(n.sim = 10000,
                      model = c("fixed.normal", "random.normal",
                                "t.test", "fr.mixed"),
                      seed = 12345, alpha = 0.05,
-                     n.cores = 5)
+                     n.cores = 4)
 
 # evaluate results:
 eval.sim(sim.study8, d_true = 0.1225, k = 5)
@@ -143,7 +143,7 @@ sim.study9 <- do.sim(n.sim = 10000,
                      model = c("fixed.normal", "random.normal",
                                "t.test", "fr.mixed"),
                      seed = 12345, alpha = 0.05,
-                     n.cores = 5)
+                     n.cores = 4)
 
 # evaluate results:
 eval.sim(sim.study9, d_true = 0.28, k = 5)

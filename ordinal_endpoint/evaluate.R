@@ -38,20 +38,9 @@ eval.sim <- function(sim.study, d_true = 0, k = 4) {
                     "random.normal" = c(bias.random.normal, coverage.random.normal, NA),
                     "t.test" = NA,
                     "mixed.model" = NA)
-  # res <- data.frame("Bias" = c(bias.fixed.normal, bias.random.normal, NA, NA),
-  #                   "Coverage" = c(coverage.fixed.normal, coverage.random.normal, NA, NA)
-  # )
-  # res$typeI <- as.vector(as.numeric(sim.study$p_res[2, ]))
   res[3, ] <- as.vector(as.numeric(sim.study$p_res[2, ]))
-  # row.names(res) <- c("Bayesian fixed effects model",
-  #                     "Bayesian random effects model",
-  #                     "t-test",
-  #                     "Frequentist mixed model")
-  # names(res) <- c("Mean bias", "Coverage", "Type I error rate")
   row.names(res) <- c("Mean bias", "Coverage", "Type I error rate")
-  # print(format.r(res, k))
   print(format.r(res, k))
-  # opts <- options(knitr.kable.NA = "")
   knitr::kable(format.r(res, k), format = "latex", linesep = "")
 }
 
@@ -63,10 +52,5 @@ format.r <- function(x, k = 3, cl.z = F) {
   if (cl.z) {
     val[which(val == f.r(0, k))] <- paste("<", 0.1^k, sep = "")
   }
-  # for (i in 1:nrow(val)) {
-  #   for (j in 1:ncol(val)) {
-  #     val[i, j] <- gsub("NA", "  ", val[i, j])
-  #   }
-  # }
   val
 }

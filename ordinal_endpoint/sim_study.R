@@ -20,7 +20,7 @@ sim.study1 <- do.sim(n.sim = 10000,
                      seed = 76057, alpha = 0.05,
                      sigma_AB = 2, sigma_AC = 2, sigma_CB = 2,
                      n.burnin = 1000, n.iter = 10000, n.thin = 2,
-                     n.cores = 10)
+                     n.cores = 4)
 
 # evaluate results:
 eval.sim(sim.study1, k = 5)
@@ -36,7 +36,7 @@ sim.study2 <- do.sim(n.sim = 10000,
                      seed = 85206, alpha = 0.05,
                      sigma_AB = 2, sigma_AC = 2, sigma_CB = 2,
                      n.burnin = 1000, n.iter = 10000, n.thin = 2,
-                     n.cores = 10)
+                     n.cores = 4)
 
 # evaluate results:
 eval.sim(sim.study2, k = 5)

@@ -46,7 +46,3 @@ sim.dat <- function(n = 59, n_raters = 6, n_questions = 3,
   }
   return(y)
 }
-
-# Test run:
-# y <- sim.dat()
-# y <- sim.dat(tau_AB = 2)

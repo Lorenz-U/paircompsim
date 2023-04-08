@@ -38,9 +38,7 @@ do.sim <- function(n.sim = 100, model = "fixed.normal", seed = 12345, alpha = 0.
   # one list entry per model:
   res <- list(4)
   
-  # create p-value matrix (ncol=4, because max. 4 different models will be evaluated).
-  # Note: actually, we only assess 2 different models; for ordinal data, we need a
-  # separate function => to be updated.
+  # create p-value matrix.
   p_AB_mat <- p_AC_mat <- p_CB_mat <- matrix(NA, nrow = n.sim, ncol = 4)
   
   # create object for p-value output:
@@ -113,7 +111,6 @@ do.sim <- function(n.sim = 100, model = "fixed.normal", seed = 12345, alpha = 0.
   
   
   # Do frequentist t-test for A vs. C:
-  
   if ("t.test" %in% model) {
     cl <- makeCluster(n.cores)
     registerDoParallel(cl)
@@ -137,7 +134,6 @@ do.sim <- function(n.sim = 100, model = "fixed.normal", seed = 12345, alpha = 0.
   }
   
   # Fit frequentist mixed model for A vs. C:
-  
   if ("fr.mixed" %in% model) {
     cl <- makeCluster(n.cores)
     registerDoParallel(cl)
@@ -146,10 +142,8 @@ do.sim <- function(n.sim = 100, model = "fixed.normal", seed = 12345, alpha = 0.
       y.i <- y[[sim.i]]
       y.i.i <- c()
       for (vec.i in 1:dim(y.i)[3]) {
-        # y.i.i <- c(y.i[, 2, 1], y.i[, 2, 2], y.i[, 2, 3], y.i[, 2, 4], y.i[, 2, 5], y.i[, 2, 6])
         y.i.i <- c(y.i.i, y.i[, 2, vec.i])
       }
-      # y.i.i <- c(y.i[, 2, 1], y.i[, 2, 2], y.i[, 2, 3], y.i[, 2, 4], y.i[, 2, 5], y.i[, 2, 6])
       rater.i <- rep(1:dim(y.i)[3], each = dim(y.i)[1])
       require(nlme)
       fit <- lme(y.i.i ~ 1, random = ~1|rater.i) # compound symmetry structure
@@ -163,8 +157,6 @@ do.sim <- function(n.sim = 100, model = "fixed.normal", seed = 12345, alpha = 0.
     }
     cat(paste0("Frequentist mixed models done, ", Sys.time(), "\n"))
   }
-  # stopCluster(cl)
-  
   # End of parallel run section.
   
   # For single core runs:
